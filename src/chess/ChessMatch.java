@@ -17,12 +17,18 @@ public class ChessMatch {
 
     public ChessPiece[][] getPieces() {
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
-        for(int i = 0; i < board.getRows(); i++) {
-            for(int j = 0; j < board.getColumns(); j++) {
+        for (int i = 0; i < board.getRows(); i++) {
+            for (int j = 0; j < board.getColumns(); j++) {
                 mat[i][j] = (ChessPiece) board.piece(i, j);
             }
         }
         return mat;
+    }
+
+    public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.piece(position).possibleMoves();
     }
 
     public ChessPiece performChessMove(ChessPosition soucePosition, ChessPosition targetPosition) {
@@ -43,15 +49,16 @@ public class ChessMatch {
     }
 
     private void validateSourcePosition(Position position) {
-        if(!board.thereIsAPiece(position)) {
+        if (!board.thereIsAPiece(position)) {
             throw new ChessException("Nao existe peca na posicao de origem");
-        } if(!board.piece(position).isThereAnyPossibleMove()) {
+        }
+        if (!board.piece(position).isThereAnyPossibleMove()) {
             throw new ChessException("Nao existe movimentos possiveis para a peca escolhida");
         }
     }
 
     private void validateTargetPosition(Position source, Position target) {
-        if(!board.piece(source).possibleMove(target)) {
+        if (!board.piece(source).possibleMove(target)) {
             throw new ChessException("A peca escolhida nao pode se mover para a posicao de destino");
         }
     }
@@ -75,4 +82,5 @@ public class ChessMatch {
         placeNewPiece('e', 8, new Rook(board, Color.BLACK));
         placeNewPiece('d', 8, new King(board, Color.BLACK));
     }
+
 }
