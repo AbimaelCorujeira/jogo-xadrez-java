@@ -46,7 +46,7 @@ public class UI {
             return new ChessPosition(column, row);
         }
         catch (RuntimeException e) {
-            throw new InputMismatchException("Erro ao ler ChessPosition. Os valores válidos são de a1 a h8.\n");
+            throw new InputMismatchException("Erro ao ler a posiçao da peca. Os valores validos sao de a1 a h8.\n");
         }
     }
 
@@ -97,7 +97,7 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if (piece.getColor() == Color.BLACK) {
+            if (piece.getColor() == Color.PRETO) {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
             else {
@@ -109,9 +109,9 @@ public class UI {
 
     private static void printCapturedPieces(List<ChessPiece> captured) {
         List<ChessPiece> white = captured.stream().filter
-                (x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+                (x -> x.getColor() == Color.PRETO).collect(Collectors.toList());
         List<ChessPiece> black = captured.stream().filter
-                (x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+                (x -> x.getColor() == Color.BRANCO).collect(Collectors.toList());
         System.out.println("Pecas capturadas: ");
         System.out.print("Brancas: ");
         System.out.print(ANSI_WHITE);
