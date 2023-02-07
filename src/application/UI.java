@@ -56,9 +56,14 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turno: " + chessMatch.getTurn());
-        System.out.println("Aguardando jogador: " + chessMatch.getCurrentPlayer());
-        if(chessMatch.getCheck()) {
-            System.out.println("CHECK!");
+        if(!chessMatch.getCheckMate()) {
+            System.out.println("Aguardando jogador: " + chessMatch.getCurrentPlayer());
+            if (chessMatch.getCheck()) {
+                System.out.println("CHECK!");
+            }
+        } else {
+            System.out.println("CHECKMATE!");
+            System.out.println("Vencedor: " + chessMatch.getCurrentPlayer());
         }
     }
 
@@ -92,7 +97,7 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if (piece.getColor() == Color.WHITE) {
+            if (piece.getColor() == Color.PRETO) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
             }
             else {
@@ -104,9 +109,9 @@ public class UI {
 
     private static void printCapturedPieces(List<ChessPiece> captured) {
         List<ChessPiece> white = captured.stream().filter
-                (x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+                (x -> x.getColor() == Color.PRETO).collect(Collectors.toList());
         List<ChessPiece> black = captured.stream().filter
-                (x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+                (x -> x.getColor() == Color.BRANCO).collect(Collectors.toList());
         System.out.println("Pecas capturadas: ");
         System.out.print("Brancas: ");
         System.out.print(ANSI_WHITE);
