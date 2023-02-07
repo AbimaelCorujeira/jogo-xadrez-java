@@ -97,11 +97,11 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if (piece.getColor() == Color.PRETO) {
-                System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+            if (piece.getColor() == Color.BLACK) {
+                System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
             else {
-                System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+                System.out.print(ANSI_WHITE + piece + ANSI_RESET);
             }
         }
         System.out.print(" ");
@@ -109,9 +109,9 @@ public class UI {
 
     private static void printCapturedPieces(List<ChessPiece> captured) {
         List<ChessPiece> white = captured.stream().filter
-                (x -> x.getColor() == Color.PRETO).collect(Collectors.toList());
+                (x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
         List<ChessPiece> black = captured.stream().filter
-                (x -> x.getColor() == Color.BRANCO).collect(Collectors.toList());
+                (x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
         System.out.println("Pecas capturadas: ");
         System.out.print("Brancas: ");
         System.out.print(ANSI_WHITE);
